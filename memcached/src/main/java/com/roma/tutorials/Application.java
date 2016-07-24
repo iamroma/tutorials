@@ -13,25 +13,20 @@ public class Application {
     public static void main(String[] args) {
         MemcachedClient mc = SpyMemcachedClient.getMClient();
 
-        // Set the text, setting a timeout of 3 seconds
+        // 1. Set the text, setting a timeout of 3 seconds
         Future f = mc.set("key", 3, "Hello Memcached！");
         try {
             System.out.println("The memcached server state is: " + f.get());
-        // Thread.sleep(3000);
+            // Thread.sleep(3000);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        // Get the text
+        // 2. Get the text
         Object o = mc.get("key");
         System.out.println("the store value is: " + o.toString());
 
-        // Close the client
+        // 3. Close the client
         mc.shutdown();
     }
-
-//    $ javac -cp memcached-2.6rc1.jar MySpySample.java
-//    To execute the sample:
-//
-//    $ java -cp memcached-2.6rc1.jar:. MySpySample
 }
